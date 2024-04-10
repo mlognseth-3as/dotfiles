@@ -47,6 +47,12 @@ else
 	source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+if [[ -f ~/.zsh/zsh-completions/zsh-completions.plugin.zsh ]]; then
+	fpath=(~/.zsh/zsh-completions $fpath)
+else
+	git clone https://github.com/zsh-users/zsh-completions.git ~/.zsh/zsh-completions
+	fpath=(~/.zsh/zsh-completions $fpath)
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
