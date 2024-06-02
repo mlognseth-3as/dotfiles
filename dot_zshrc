@@ -60,7 +60,7 @@ else
 	fpath=(~/.zsh/zsh-completions $fpath)
 fi
 
-if [[ -f "~/Library/Fonts/MesloLGS NF Regular.ttf" ]]; then
+if [[ -f "Library/Fonts/MesloLGS NF Regular.ttf" ]]; then
 	set_font "MesloLGS NF Regular.ttf" 11
 else
 	(cd ~/Library/Fonts && wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
