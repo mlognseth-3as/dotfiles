@@ -38,7 +38,7 @@ else
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 	source ~/powerlevel10k/powerlevel10k.zsh-theme
 fi
-	
+
 if [[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
 	source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
@@ -67,6 +67,7 @@ alias g="git"
 alias gc="git commit"
 alias gp="git push"
 alias gst="git status"
+alias gfuck="git reset --soft HEAD~"
 alias tf="terraform"
 alias k="kubectl"
 alias ks="kubens"
