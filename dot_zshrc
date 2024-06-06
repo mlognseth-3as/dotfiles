@@ -60,13 +60,6 @@ else
 	fpath=(~/.zsh/zsh-completions $fpath)
 fi
 
-if [[ -f "Library/Fonts/MesloLGS NF Regular.ttf" ]]; then
-	set_font "MesloLGS NF Regular.ttf" 11
-else
-	(cd ~/Library/Fonts && wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
-	set_font "MesloLGS NF Regular.ttf" 11
-fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -82,3 +75,7 @@ alias aws-profiles="cat ~/.aws/credentials | grep -o '\[[^]]*\]'"
 alias kx="kubectx"
 alias azc="az account set -s"
 alias azl="az account list -o table"
+
+# You can run (cd ~/Library/Fonts && wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
+# Followed by set_font "MesloLGS NF Regular.ttf" 11
+# To set the recommended font.
