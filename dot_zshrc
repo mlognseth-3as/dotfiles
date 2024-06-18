@@ -75,6 +75,7 @@ alias aws-profiles="cat ~/.aws/credentials | grep -o '\[[^]]*\]'"
 alias kx="kubectx"
 alias azc="az account set -s"
 alias azl="az account list -o table"
+alias charm="/Applications/PyCharm CE.app/Contents/MacOS/pycharm"
 
 # You can run (cd ~/Library/Fonts && wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
 # Followed by set_font "MesloLGS NF Regular.ttf" 11
