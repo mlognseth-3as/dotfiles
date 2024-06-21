@@ -32,12 +32,12 @@ plugins=(
 	zsh-kubectl-prompt
 )
 
-if [[ -f ~/powerlevel10k/powerlevel10k.zsh-theme ]]; then
-	source ~/powerlevel10k/powerlevel10k.zsh-theme
-else
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-	source ~/powerlevel10k/powerlevel10k.zsh-theme
-fi
+# if [[ -f ~/powerlevel10k/powerlevel10k.zsh-theme ]]; then
+# 	source ~/powerlevel10k/powerlevel10k.zsh-theme
+# else
+# 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+# 	source ~/powerlevel10k/powerlevel10k.zsh-theme
+# fi
 
 if [[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
 	source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
