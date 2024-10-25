@@ -2,7 +2,7 @@
 
 ## Apply on new machine
 
-`sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply lognseth`
+`sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply lgnsth`
 
 ## Update on any machine
 
