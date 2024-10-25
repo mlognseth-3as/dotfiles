@@ -14,6 +14,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 ZSH_THEME="cloud"
 
 source $ZSH/oh-my-zsh.sh
+# source $HOME/.zsh/zsh-abbr/zsh-abbr.zsh
 source <(fzf --zsh)
 
 # Aliases
@@ -33,6 +34,13 @@ alias aws-profiles="cat ~/.aws/credentials | grep -o '\[[^]]*\]'"
 alias kx="kubectx"
 alias azc="az account set -s"
 alias azl="az account list -o table"
+alias co="git checkout"
+alias grep="\grep"
+
+GLOBALIAS_FILTER_VALUES=(
+grep
+)
+
 
 precmd() {
     precmd() {
