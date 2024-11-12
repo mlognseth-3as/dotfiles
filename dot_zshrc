@@ -15,13 +15,29 @@ ZSH_THEME="cloud"
 
 source $ZSH/oh-my-zsh.sh
 # source $HOME/.zsh/zsh-abbr/zsh-abbr.zsh
-source <(fzf --zsh)
+# source <(fzf --zsh)
+
+if command -v fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
+
+# Enable completion for all Zsh commands
+autoload -Uz compinit
+compinit -C
+
+# Set the directory for your completions (optional)
+fpath=(~/.zsh/completions $fpath)
+
+# Source the completion files (optional)
+for f in ~/.zsh/completions/*.zsh; do
+    source $f
+done
 
 # Aliases
-alias ls='ls --color'
-alias vim='nvim'
-alias c='clear'
+alias ls="ls --color"
+alias c="clear"
 alias g="git"
+alias m="minikube"
 alias gc="git commit"
 alias gp="git push"
 alias gst="git status"
@@ -36,6 +52,7 @@ alias azc="az account set -s"
 alias azl="az account list -o table"
 alias co="git checkout"
 alias grep="\grep"
+alias ax="azctx"
 
 GLOBALIAS_FILTER_VALUES=(
 grep
@@ -87,4 +104,10 @@ zle-line-init() {
   return ret
 }
 
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
 zle -N zle-line-init
+eval "$(gh copilot alias -- zsh)"
