@@ -186,5 +186,6 @@ function bootstrap_mac {
     zsh \
     zsh-autosuggestions \
     zsh-completions \
-    zsh-syntax-highlighting
+    zsh-syntax-highlighting \
+    httpie
 }
