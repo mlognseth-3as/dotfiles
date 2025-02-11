@@ -1,3 +1,11 @@
+autoload -Uz compinit
+
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+    compinit -C
+else
+    compinit -i
+fi
+
 plugins=(
 	git
 	kubectl
@@ -11,19 +19,17 @@ plugins=(
 
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-ZSH_THEME="cloud"
+ZSH_THEME="robbyrussell"
 
 source $ZSH/oh-my-zsh.sh
-# source $HOME/.zsh/zsh-abbr/zsh-abbr.zsh
-# source <(fzf --zsh)
 
 if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
 fi
 
 # Enable completion for all Zsh commands
-autoload -Uz compinit
-compinit -C
+# autoload -Uz compinit
+# compinit -C
 
 # Set the directory for your completions (optional)
 fpath=(~/.zsh/completions $fpath)
@@ -32,6 +38,8 @@ fpath=(~/.zsh/completions $fpath)
 for f in ~/.zsh/completions/*.zsh; do
     source $f
 done
+
+# Environment variables
 
 # Aliases
 alias ls="ls --color"
@@ -53,11 +61,13 @@ alias azl="az account list -o table"
 alias co="git checkout"
 alias grep="\grep"
 alias ax="azctx"
+alias kux="kubie ctx"
+alias codi="code-insiders"
+alias z="zed"
 
 GLOBALIAS_FILTER_VALUES=(
 grep
 )
-
 
 precmd() {
     precmd() {
@@ -65,15 +75,15 @@ precmd() {
     }
 }
 
+
 KUBE_PS1_SYMBOL_PADDING=true
 KUBE_PS1_SYMBOL_CUSTOM='img'
 KUBE_PS1_SEPARATOR=''
 KUBE_PS1_SUFFIX=')'
-ZSH_THEME_AZURE_PREFIX=' '
+ZSH_THEME_AZURE_PREFIX='💠 '
 ZSH_THEME_AZURE_SUFFIX=' '
 NEWLINE=$'\n'
 PROMPT='$(kube_ps1) | %F{blue}$(azure_prompt_info)%f ${NEWLINE}'$PROMPT
-# RPROMPT="$(azure_prompt_info)"
 
 # Custom transient prompt
 zle-line-init() {
@@ -90,7 +100,8 @@ zle-line-init() {
 
   local saved_prompt=$PROMPT
   local saved_rprompt=$RPROMPT
-  PROMPT='%# '
+  # PROMPT='%# '
+  PROMPT='➜ '
   RPROMPT=''
   zle .reset-prompt
   PROMPT=$saved_prompt
@@ -104,10 +115,76 @@ zle-line-init() {
   return ret
 }
 
-timezsh() {
-  shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
-}
-
 zle -N zle-line-init
-eval "$(gh copilot alias -- zsh)"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Lazy loading
+
+if [ $commands[kubectl] ]; then
+
+  # Placeholder 'kubectl' shell function:
+  # Will only be executed on the first call to 'kubectl'
+  kubectl() {
+
+    # Remove this function, subsequent calls will execute 'kubectl' directly
+    unfunction "$0"
+
+    # Load auto-completion
+    source <(kubectl completion zsh)
+
+    # Execute 'kubectl' binary
+    $0 "$@"
+  }
+fi
+
+# load .zsh_copilot_aliases if it exists
+# this is a workaround to speed up init of the shell
+
+if [ -f ~/.zsh_copilot_aliases ]; then
+    . ~/.zsh_copilot_aliases
+else 
+  gh copilot alias -- zsh > .zsh_copilot_aliases
+  . ~/.zsh_copilot_aliases
+fi
+
+# correct approach:
+# eval "$(gh copilot alias -- zsh)"
+
+function bootstrap_mac {
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
+    brew install \
+    argocd \
+    awscli \
+    azure-cli \
+    bat \
+    deepl \
+    fzf \
+    gh \
+    google-chrome \
+    helm \
+    helm-ls \
+    jq \
+    k9s \
+    kubectx \
+    kubie \
+    kubernetes-cli \
+    kube-ps1 \
+    minikube \
+    ollama \
+    raycast \
+    telnet \
+    terraform-docs \
+    terraform-ls \
+    terraform-lsp \
+    tflint \
+    tfenv \
+    zed \
+    zsh \
+    zsh-autosuggestions \
+    zsh-completions \
+    zsh-syntax-highlighting
+}
